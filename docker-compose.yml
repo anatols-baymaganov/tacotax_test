@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/home/dockeruser/project
+      - gems:/usr/local/bundle
+    links:
+      - postgres
+
+  postgres:
+    image: postgres:12
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgresql/data:/var/lib/postgresql
+
+volumes:
+  gems:
+    external:
+      name: gems
