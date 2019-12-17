@@ -1,0 +1,5 @@
+div
+  - flash.each do |type, messages|
+    - Array.wrap(messages).each do |message|
+      = render "layouts/alert", type: type, message: message
+  - flash.clear

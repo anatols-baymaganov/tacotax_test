@@ -12,8 +12,9 @@ gem "pg", ">= 0.18", "< 2.0"
 gem "puma", "~> 4.1"
 gem "rails", "~> 6.0.2"
 gem "sass-rails", ">= 6"
-gem "turbolinks", "~> 5"
+gem "slim"
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
+gem "webpacker", "~> 4.0"
 
 group :development do
   gem "listen", ">= 3.0.5", "< 3.2"

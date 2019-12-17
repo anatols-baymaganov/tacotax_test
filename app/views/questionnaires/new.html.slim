@@ -1,0 +1,3 @@
+= form_for(Questionnaire.new, html: { multipart: true }) do |f|
+  = f.file_field("body", accept: "yml")
+  = f.submit

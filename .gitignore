@@ -27,5 +27,8 @@
 # Ignore database config
 /config/database.yml
 
+# Ignore coverage's generated files
+coverage
+
 # Ignore dump, structure and other sql files
 /postgresql/*
