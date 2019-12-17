@@ -27,7 +27,7 @@ module Questionnaires
     attr_reader :file, :contract
 
     def parsed_data
-      @_parsed_data ||= YAML.load_file(file)
+      @parsed_data ||= YAML.load_file(file)
     end
 
     def reference

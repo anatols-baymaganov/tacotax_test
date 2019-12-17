@@ -19,7 +19,9 @@ class QuestionnaireContract < Dry::Validation::Contract
 
     case element.type&.value
     when "questionnaire"
-      @errors << "Line: #{element.line}: questionnaire should contain reference field" if param_blank?(element, :reference)
+      if param_blank?(element, :reference)
+        @errors << "Line: #{element.line}: questionnaire should contain reference field"
+      end
       @errors << "Line: #{element.line}: questionnaire should contain content" if param_blank?(element, :content)
     when "slide" then should_contain_ref_lbl_content(element)
     when "text_input" then should_contain_ref_and_lbl(element)
@@ -34,8 +36,12 @@ class QuestionnaireContract < Dry::Validation::Contract
   end
 
   def should_contain_ref_and_lbl(element)
-    @errors << "Line: #{element.line}: #{element.type.value} should contain reference field" if param_blank?(element, :reference)
-    @errors << "Line: #{element.line}: #{element.type.value} should contain label field" if param_blank?(element, :label)
+    if param_blank?(element, :reference)
+      @errors << "Line: #{element.line}: #{element.type.value} should contain reference field"
+    end
+    return unless param_blank?(element, :label)
+
+    @errors << "Line: #{element.line}: #{element.type.value} should contain label field"
   end
 
   def should_contain_ref_lbl_content(element)
