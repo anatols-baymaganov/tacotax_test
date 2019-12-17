@@ -1,0 +1,37 @@
+reference: questionnaire_example
+type: questionnaire
+content:
+  - reference: slide1
+    type: slide
+    label: Informations personnelles
+    content:
+      - reference: first_name
+        type: text_input
+        label: Quel est votre prénom ?
+      - reference: last_name
+        type: text_input
+  - reference:
+    type: slide
+    label: Informations complémentaires
+    content:
+      - reference: family_situation
+        type: single_choice
+        label: Quel est votre situation familiale ?
+        content:
+      - reference: maried
+        type: boolean
+        label: Êtes-vous marié ?
+  - reference: slide3
+    type: undefined_type
+  - reference: slide3
+    type: slide
+    content:
+      - type: multiple_choice
+        label: Quel sont vos types de revenus ?
+        content:
+          - label: Salarié
+            value: salarie
+          - label: Retraite
+            value: retraite
+          - label: Indépendants
+      - type: number_input
