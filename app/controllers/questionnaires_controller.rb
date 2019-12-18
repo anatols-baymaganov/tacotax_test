@@ -2,7 +2,7 @@
 
 class QuestionnairesController < ApplicationController
   def show
-    render json: Questionnaire.find_by(reference: params[:reference]).body
+    render json: Questionnaire.get(params[:reference])
   end
 
   def create

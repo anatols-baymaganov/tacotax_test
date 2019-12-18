@@ -30,5 +30,5 @@
 # Ignore coverage's generated files
 coverage
 
-# Ignore dump, structure and other sql files
-/postgresql/*
+# Ignore .env
+.env

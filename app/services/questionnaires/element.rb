@@ -16,7 +16,7 @@ module Questionnaires
     attr_reader :reference, :type, :label, :value, :content, :parent
 
     def line
-      [reference, type, label, value, content].compact.map(&:line).min
+      @line ||= [reference, type, label, value, content].compact.map(&:line).min
     end
 
     protected

@@ -16,7 +16,7 @@ module Questionnaires
       end.flatten.map(&:capitalize)
       return if @errors.any?
 
-      Questionnaire.find_or_initialize_by(reference: reference).update(body: body)
+      Questionnaire.set(reference, body)
     rescue StandardError => _e
       @errors |= ["Incorrect file format"]
       nil
