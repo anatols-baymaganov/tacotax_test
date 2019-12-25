@@ -15,6 +15,17 @@ module Questionnaires
 
     attr_reader :reference, :type, :label, :value, :content, :parent
 
+    def [](key)
+      public_send(key).value
+    end
+
+    def as_json
+      @as_json ||= begin
+        content&.value&.map!(&:as_json)
+        [reference, type, label, value, content].compact.map(&:as_json).inject({}, :merge)
+      end
+    end
+
     def line
       @line ||= [reference, type, label, value, content].compact.map(&:line).min
     end
