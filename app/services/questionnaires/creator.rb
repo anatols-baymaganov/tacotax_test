@@ -16,9 +16,12 @@ module Questionnaires
       end.flatten.map(&:capitalize)
       return if @errors.any?
 
-      Questionnaire.set(reference, parsed_data.json)
-    rescue StandardError => _e
-      @errors |= ["Incorrect file format"]
+      Questionnaire.set(reference, parsed_data.as_json)
+    rescue Psych::SyntaxError => _e
+      @errors |= Array.wrap("Incorrect file format")
+      nil
+    rescue StandardError => e
+      @errors |= Array.wrap("Internal server error: #{e.message}")
       nil
     end
 
@@ -31,7 +34,7 @@ module Questionnaires
     end
 
     def reference
-      parsed_data.json["reference"]
+      parsed_data["reference"]
     end
   end
 end

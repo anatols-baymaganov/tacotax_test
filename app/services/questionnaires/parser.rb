@@ -6,12 +6,8 @@ module Questionnaires
       @hsh = YAML.load_stream(LineNumerizer.call(file)).first
     end
 
-    attr_reader :elements, :json
-
     def call
-      @elements ||= extract_element(hsh).sort! { |a, b| a.line <=> b.line }
-      @json ||= @elements.first.as_json
-      self
+      @call ||= extract_element(hsh)
     end
 
     private
@@ -30,7 +26,7 @@ module Questionnaires
       end
 
       elements << Element.new(reference, type, label, value, content)
-      elements
+      elements.last
     end
 
     def extract_field(hash, name)
