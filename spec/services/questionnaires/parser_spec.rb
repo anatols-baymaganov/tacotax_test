@@ -2,13 +2,13 @@
 
 require "rails_helper"
 
-Rails.describe Questionnaires::ElementsExtractor, type: :service do
-  let(:yaml) { YAML.load_file("spec/support/examples/good.yml") }
+Rails.describe Questionnaires::Parser, type: :service do
+  let(:yaml) { File.open("spec/support/examples/good.yml") }
   let(:service) { described_class.new(yaml) }
 
-  describe "#extract" do
-    let(:results) { service.extract }
-    let(:parent_element) { results[10] }
+  describe "#call" do
+    let(:results) { service.call.elements }
+    let(:parent_element) { results[9] }
     let(:response_element) { results[13] }
     let(:references) { results.map { |el| el.reference&.value }.compact }
     let(:expected_references) do

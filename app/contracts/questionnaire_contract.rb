@@ -7,8 +7,7 @@ class QuestionnaireContract < Dry::Validation::Contract
   end
 
   rule(:body) do
-    elements = Questionnaires::ElementsExtractor.new(value).extract
-    errors = elements.map { |element| validate_element(element) }.flatten
+    errors = value.map { |element| validate_element(element) }.flatten
     key.failure(errors.join("\n")) if errors.any?
   end
 

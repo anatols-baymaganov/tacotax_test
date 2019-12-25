@@ -4,7 +4,7 @@ require "rails_helper"
 
 Rails.describe QuestionnaireContract do
   let(:reference) { "blah" }
-  let(:body) { YAML.load_file(filename) }
+  let(:body) {  Questionnaires::Parser.new(File.open(filename)).call.elements }
   let(:contract) { described_class.new }
   let(:errors) do
     contract.call(reference: reference, body: body).errors(full: true).map do |err|
@@ -35,14 +35,14 @@ Rails.describe QuestionnaireContract do
       let(:expected_errors) do
         [
           "Line: 11: text_input should contain label field",
-          "Line: 13: slide should contain reference field",
-          "Line: 17: single_choice should contain at least one content",
-          "Line: 25: undefined element type",
-          "Line: 26: slide should contain label field",
-          "Line: 29: multiple_choice should contain reference field",
-          "Line: 36: response element should contain value field",
-          "Line: 37: number_input should contain reference field",
-          "Line: 37: number_input should contain label field"
+          "Line: 30: slide should contain reference field",
+          "Line: 33: single_choice should contain at least one content",
+          "Line: 41: undefined element type",
+          "Line: 42: slide should contain label field",
+          "Line: 46: multiple_choice should contain reference field",
+          "Line: 53: response element should contain value field",
+          "Line: 54: number_input should contain reference field",
+          "Line: 54: number_input should contain label field"
         ]
       end
 
